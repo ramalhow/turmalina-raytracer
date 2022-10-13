@@ -10,6 +10,7 @@ int main()
     // Render loop to image
     for (int j = IMAGE_HEIGHT-1; j >= 0; --j) {
         for (int i = 0; i < IMAGE_WIDTH; ++i) {
+            std::cerr << "\rScanlines remaining: " << j << '\n';
 
             float r = float(i) / (IMAGE_WIDTH-1);
             float g = float(j) / (IMAGE_HEIGHT-1);
