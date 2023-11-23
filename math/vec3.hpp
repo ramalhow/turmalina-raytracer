@@ -1,13 +1,9 @@
 #pragma once
-#include <cmath>
-#include <stdio.h>
 
 // Structure that represents 3D vector in space, with (X, Y, Z) components
 struct Vec3 {
-  // Components
   float x, y, z;
 
-  // Default constructor is zero-initialized
   inline Vec3() : x(0), y(0), z(0){};
 
   // Constructs a vector with a single value for each component
@@ -20,62 +16,22 @@ struct Vec3 {
   inline Vec3(const Vec3 &vec) : x{vec.x}, y{vec.y}, z{vec.z} {}
 
   // Constructs a vector by assignment
-  inline Vec3 &operator=(const Vec3 &vec) {
-    if (this == &vec)
-      return *this;
-
-    x = vec.x;
-    y = vec.y;
-    z = vec.z;
-
-    return *this;
-  };
-
-  // Static Methods
-  static const Vec3 Zero() { return Vec3(0, 0, 0); }
-
-  static const Vec3 Unit() { return Vec3(1, 1, 1); }
-
-  static const Vec3 Up() { return Vec3(0, 1, 0); }
-
-  static const Vec3 Down() { return Vec3(0, -1, 0); }
-
-  static const Vec3 Right() { return Vec3(1, 0, 0); }
-
-  static const Vec3 Left() { return Vec3(-1, 0, 0); }
-
-  static const Vec3 Foward() { return Vec3(0, 0, 1); }
-
-  static const Vec3 Backward() { return Vec3(0, 0, -1); }
-
-  static float DotProduct();
-
-  static Vec3 CrossProduct();
-
-  static Vec3 RotateVector();
+  Vec3 operator=(const Vec3 &vec);
 
   // Arithmetic Operators
   Vec3 operator-() const;
 
-  Vec3 operator+(float value);
+  Vec3 operator+(float value) const;
 
-  Vec3 operator-(float value);
+  Vec3 operator-(float value) const;
 
-  Vec3 operator*(float value);
+  Vec3 operator*(float value) const;
 
-  Vec3 operator/(float value);
+  Vec3 operator/(float value) const;
 
-  Vec3 operator+=(float value);
+  Vec3 operator+(const Vec3 &vec) const;
 
-  Vec3 operator-=(float value);
-
-  Vec3 operator*=(float value);
-
-  Vec3 operator/=(float value);
-
-  Vec3 operator+(const Vec3 &vec);
-
-  Vec3 operator-(const Vec3 &vec);
+  Vec3 operator-(const Vec3 &vec) const;
 
   // Comparison Operators
   bool operator==(const Vec3 &vec) const;
@@ -92,15 +48,32 @@ struct Vec3 {
 
   // Member Methods
 
-  float Dot();
+  double LengthSquared() const;
 
-  Vec3 Cross();
+  double Length() const;
 
-  bool Normalize();
+  void ToString() const;
 
-  float Length();
+  // Static Methods
+  static Vec3 Zero() { return Vec3(0, 0, 0); }
 
-  Vec3 Rotate();
+  static Vec3 One() { return Vec3(1, 1, 1); }
 
-  void ToString();
+  static Vec3 Up() { return Vec3(0, 1, 0); }
+
+  static Vec3 Down() { return Vec3(0, -1, 0); }
+
+  static Vec3 Right() { return Vec3(1, 0, 0); }
+
+  static Vec3 Left() { return Vec3(-1, 0, 0); }
+
+  static Vec3 Foward() { return Vec3(0, 0, 1); }
+
+  static Vec3 Backward() { return Vec3(0, 0, -1); }
 };
+
+Vec3 Normalize(const Vec3& vec);
+
+float Dot(const Vec3 &v1, const Vec3 &v2);
+
+Vec3 Cross(const Vec3 &v1, const Vec3 &v2);
